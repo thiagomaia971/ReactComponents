@@ -2,8 +2,12 @@ import React, { Component, PropTypes } from 'react';
 
 class TextBoxFor extends Component {
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
+
+        this.state = {
+            value: this.props.value
+        }
 
         this.onChange = this.onChange.bind(this);
     }
@@ -24,21 +28,31 @@ class TextBoxFor extends Component {
 
     render() {
 
-        return (
-            <div className='form-group' style={{ margin: '10px' }}>
+        const styleFormGroup = {
+            display: (this.props.inline) ? 'inline-block' : 'block',
+            margin: '10px 10px 5px 5px',
+            width: this.props.width
+        }
 
-                <label htmlFor={this.props.name}>
-                    {this.props.label}
+        const styleInput = {
+            display: "initial"
+        }
+
+        return (
+            <div className='form-group' style={ styleFormGroup } >
+
+                <label htmlFor={ this.props.name } >
+                    { this.props.label }
                 </label>
 
-                <input id={this.props.name}
+                <input id={ this.props.name }
                     className='form-control'
-                    type={this.props.inputType}
-                    placeholder={this.props.placeholder}
-                    value={this.state.value}
-                    onChange={this.onChange}
-                    ref={this.props.name} 
-                    disabled={this.props.disabled}/>
+                    type={ this.props.inputType }
+                    placeholder={ this.props.placeholder }
+                    defaultValue={ this.state.value }
+                    onChange={ (e) => this.props.onChange(e.target.value) }
+                    disabled={ this.props.disabled }
+                    style={styleInput}/>
 
             </div>
         )
@@ -48,17 +62,21 @@ class TextBoxFor extends Component {
 
 TextBoxFor.propTypes = {
     name: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
+    value: PropTypes.any.isRequired,
+    onChange: PropTypes.func,
     label: PropTypes.string,
     inputType: PropTypes.string,
     placeholder: PropTypes.string,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    width: PropTypes.string,
+    inline: PropTypes.bool
 }
 
 TextBoxFor.defaultProps = {
     inputType: 'text',
-    disabled: false
+    disabled: false,
+    width: '200px',
+    inline: false
 }
 
 export default TextBoxFor;

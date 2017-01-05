@@ -11,6 +11,13 @@ export const TypeColor = {
 
 class Button extends Component {
 
+    constructor(props){
+        super(props);
+        this.state = {
+            style: {}
+        }
+    }
+
     defaultStyle() {
 
         if (this.props.style) {
@@ -36,34 +43,58 @@ class Button extends Component {
     }
 
     componentWillMount() {
-        this.defaultStyle();
+        //this.defaultStyle();
     }
 
     render() {
 
+        const styleFormGroup = {
+            display: (this.props.inline) ? 'inline-block' : 'block',
+            margin: '5px 0px 10px 10px',
+            width: this.props.width
+        }
+
+        const styleButton = {
+            width: this.props.width
+        }
+
         return (
-            <button type={this.props.buttonType}
-                className={'btn btn-' + this.props.color + ' ' + this.props.className}
-                style={this.state.style} >
+            <div className={"form-group"} 
+                 style={styleFormGroup}>
 
-                {this.props.text}
+                <button type={this.props.buttonType}
+                    className={'btn btn-' + this.props.color + " " + this.props.classButton}
+                    style={this.props.classButton} 
+                    style={styleButton} 
+                    onClick={this.props.onClick}>
 
-            </button>
+                    {this.props.text}
+
+                </button>
+            </div>
         );
     }
 }
 
 Button.propTypes = {
     text: PropTypes.string.isRequired,
+    onClick: PropTypes.func,
     buttonType: PropTypes.string,
     color: PropTypes.string,
     className: PropTypes.string,
-    style: PropTypes.object
+    style: PropTypes.object,
+    classButton: PropTypes.string,
+    width: PropTypes.string,
+    inline: PropTypes.bool
 }
 
 Button.defaultProps = {
     buttonType: "button",
-    color: TypeColor.DEFAULT
+    color: TypeColor.DEFAULT,
+    classButton: "",
+    className: "",
+    width: '138px',
+    inline: true
 }
 
 export default Button;
