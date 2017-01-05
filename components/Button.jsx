@@ -6,7 +6,8 @@ export const TypeColor = {
     SUCCESS: "success",
     INFO: "info",
     WARNING: "warning",
-    DANGER: "danger"
+    DANGER: "danger",
+    PMENOS: "pmenos"
 }
 
 class Button extends Component {
@@ -55,7 +56,9 @@ class Button extends Component {
         }
 
         const styleButton = {
-            width: this.props.width
+            width: this.props.width,
+            backgroundColor: (this.props.color == TypeColor.PMENOS) ? '#0054a6' : '',
+            color: (this.props.color == TypeColor.PMENOS) ? 'white' : '',
         }
 
         return (

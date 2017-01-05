@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 
 class TextBoxFor extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -12,10 +12,10 @@ class TextBoxFor extends Component {
         this.onChange = this.onChange.bind(this);
     }
 
-    onChange(e){
+    onChange(e) {
         let newValue = e.target.value;
 
-        this.setState({value: newValue});
+        this.setState({ value: newValue });
         this.props.onChange(newValue);
 
     }
@@ -30,7 +30,7 @@ class TextBoxFor extends Component {
 
         const styleFormGroup = {
             display: (this.props.inline) ? 'inline-block' : 'block',
-            margin: '10px 10px 5px 5px',
+            margin: '10px 0px 10px 10px',
             width: this.props.width
         }
 
@@ -38,21 +38,47 @@ class TextBoxFor extends Component {
             display: "initial"
         }
 
-        return (
-            <div className='form-group' style={ styleFormGroup } >
+        const styleAddon = {
+            cursor: "default"
+        }
 
-                <label htmlFor={ this.props.name } >
-                    { this.props.label }
+        return (
+            <div className='textBoxFor form-group ' style={styleFormGroup} >
+
+                <label className='textBoxFor-label' htmlFor={this.props.name} >
+                    {this.props.label}
                 </label>
 
-                <input id={ this.props.name }
-                    className='form-control'
-                    type={ this.props.inputType }
-                    placeholder={ this.props.placeholder }
-                    defaultValue={ this.state.value }
-                    onChange={ (e) => this.props.onChange(e.target.value) }
-                    disabled={ this.props.disabled }
-                    style={styleInput}/>
+                <div className="input-group" style={{ width: this.props.width }}>
+
+                    {
+                        (this.props.leftLabel) ?
+                            <span className="input-group-addon" style={ styleAddon }>
+                                {this.props.leftLabel}
+                            </span>
+                            :
+                            <span></span>
+                    }
+
+                    <input className='textBoxFor-input' id={this.props.name}
+                        className='form-control'
+                        type={this.props.inputType}
+                        placeholder={this.props.placeholder}
+                        defaultValue={this.state.value}
+                        onChange={(e) => this.props.onChange(e.target.value)}
+                        disabled={this.props.disabled}
+                        style={styleInput} />
+
+                    {
+                        (this.props.rightLabel) ?
+                            <span className="input-group-addon" style={{ styleAddon }}>
+                                {this.props.rightLabel}
+                            </span>
+                            :
+                            <span></span>
+                    }
+
+                </div>
 
             </div>
         )
@@ -69,7 +95,9 @@ TextBoxFor.propTypes = {
     placeholder: PropTypes.string,
     disabled: PropTypes.bool,
     width: PropTypes.string,
-    inline: PropTypes.bool
+    inline: PropTypes.bool,
+    rightLabel: PropTypes.string,
+    leftLabel: PropTypes.string
 }
 
 TextBoxFor.defaultProps = {
