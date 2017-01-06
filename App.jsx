@@ -83,8 +83,8 @@ class App extends React.Component {
                 <br />
 
                 <NavTab>
-                    <NavItem label="Home" active={true} />
-                    <NavItem label="Cliente" href="#test" />
+                    <NavItem i={0} label="Home"  />
+                    <NavItem i={1} label="Cliente" href="#test" />
                 </NavTab>
 
                 <div id="test">

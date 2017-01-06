@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
 class NavItem extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -11,13 +11,24 @@ class NavItem extends Component {
         this.handlerClick = this.handlerClick.bind(this);
     }
 
-    handlerClick(){
-        this.props.onClick(this.props.iterable);
+    handlerClick() {
+        this.props.selectItem(this);
     }
 
-    render () {
+    render() {
+
+        var selected = this.props.isSelected;
+
         return (
-            <li onClick={this.handlerClick} id={"tab-"+this.props.iterable} key={this.props.key} role="presentation" className={this.props.active}><a href={this.props.href}>{this.props.label}</a></li>
+            <li onClick={this.handlerClick}
+                 role="presentation"
+                className={selected == true ? "active" : ""}>
+
+                <a href={this.props.href}>
+                    {this.props.label} ({this.props.i})
+                </a>
+
+            </li>
         );
     }
 }
@@ -25,15 +36,17 @@ class NavItem extends Component {
 NavItem.propTypes = {
     label: PropTypes.string.isRequired,
     href: PropTypes.string,
-    active: PropTypes.bool,
+    isSelected: PropTypes.bool,
+    //active: PropTypes.bool,
     key: PropTypes.number,
-    onClick: PropTypes.func,
-    iterable: PropTypes.number
+    selectItem: PropTypes.func,
+    i: PropTypes.number
 }
 
 NavItem.defaultProps = {
     active: false,
-    href: "#"
+    href: "#",
+    isSelected: false
 }
 
 export default NavItem;

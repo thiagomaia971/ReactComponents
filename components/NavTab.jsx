@@ -6,20 +6,21 @@ class NavTab extends Component {
 
     constructor(props) {
         super(props);
-    }
-
-    getInitialState() {
-        return {
+        this.state = {
             selectedTab: null
         }
-    }
 
+        this.selectItem = this.selectItem.bind(this);
+
+    }
     selectItem(item) {
+
         this.setState({
             selectedTab: item
         });
+        
     }
-
+/*
     handleClick(i) {
         let childSelected = this.props.children[i];
 
@@ -40,20 +41,26 @@ class NavTab extends Component {
             }
         });
     }
-
+*/
 
     render() {
 
-        var selectedKey = (this.state.selectedTab && this.state.selectedTab.props.key) || null;
+        var selectedKey = (this.state.selectedTab && this.state.selectedTab.props.i >= 0) ? this.state.selectedTab.props.i : null;
 
-        var renderChildren = this.props.children.map((c, i) => {
+        var renderChildren = this.props.children.map((item, i) => {
 
-            if (c.type === NavItem) {
-                return React.cloneElement(c, {
-                    active: false,
-                    key: i,
-                    iterable: i,
-                    onClick: (_i) => { this.handleClick(_i) }
+            if (item.type === NavItem) {
+                /*console.log(`\n\n\n\nSelectedItem: `);
+                console.log(this.state.selectedTab);
+                console.log(`SelectedKey: ${selectedKey}\nItem.Props.i: ${item.props.i}`)*/
+                let isSelected = item.props.i == selectedKey;
+                //console.log(`isSelected: ${isSelected}`);
+
+                return React.cloneElement(item, {
+                    isSelected: isSelected,
+                    //iterable: i,
+                    key: item.props.i,
+                    selectItem: this.selectItem,
                 });
             }
 
