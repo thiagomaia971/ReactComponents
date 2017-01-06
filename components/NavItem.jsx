@@ -7,14 +7,17 @@ class NavItem extends Component {
         this.state = {
             active: this.props.active
         }
+
+        this.handlerClick = this.handlerClick.bind(this);
+    }
+
+    handlerClick(){
+        this.props.onClick(this.props.iterable);
     }
 
     render () {
-
-        const isActive = (this.props.active) ? 'active' : '';
-
         return (
-            <li role="presentation" className={this.props.active}><a href={this.props.href}>{this.props.label}</a></li>
+            <li onClick={this.handlerClick} id={"tab-"+this.props.iterable} key={this.props.key} role="presentation" className={this.props.active}><a href={this.props.href}>{this.props.label}</a></li>
         );
     }
 }
@@ -22,7 +25,10 @@ class NavItem extends Component {
 NavItem.propTypes = {
     label: PropTypes.string.isRequired,
     href: PropTypes.string,
-    active: PropTypes.bool
+    active: PropTypes.bool,
+    key: PropTypes.number,
+    onClick: PropTypes.func,
+    iterable: PropTypes.number
 }
 
 NavItem.defaultProps = {
