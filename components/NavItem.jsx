@@ -25,7 +25,7 @@ class NavItem extends Component {
                 className={selected == true ? "active" : ""}>
 
                 <a href={this.props.href}>
-                    {this.props.label} ({this.props.i})
+                    {this.props.label}
                 </a>
 
             </li>
@@ -37,7 +37,6 @@ NavItem.propTypes = {
     label: PropTypes.string.isRequired,
     href: PropTypes.string,
     isSelected: PropTypes.bool,
-    //active: PropTypes.bool,
     key: PropTypes.number,
     selectItem: PropTypes.func,
     i: PropTypes.number

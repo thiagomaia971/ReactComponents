@@ -7,69 +7,67 @@ class NavTab extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            selectedTab: null
+            selectedTab: this.asd()
         }
 
         this.selectItem = this.selectItem.bind(this);
 
     }
+
+    asd() {
+        let c = this.props.children[0];
+
+        this.props.children.map((child, i) => {
+            console.log(child.props.isSelected === true);
+            if (child.props.isSelected === true)
+                c= child;
+        });
+
+        return c;
+    }
+
     selectItem(item) {
 
         this.setState({
             selectedTab: item
         });
-        
+
     }
-/*
-    handleClick(i) {
-        let childSelected = this.props.children[i];
-
-        return this.props.children.map((c, i) => {
-            if (c.type === NavItem) {
-                if (c === childSelected) {
-
-                    return React.cloneElement(c, {
-                        active: true,
-                        label: "test"
-                    });
-
-                } else {
-                    c = React.cloneElement(c, {
-                        active: false
-                    })
-                }
-            }
-        });
-    }
-*/
 
     render() {
+
+
 
         var selectedKey = (this.state.selectedTab && this.state.selectedTab.props.i >= 0) ? this.state.selectedTab.props.i : null;
 
         var renderChildren = this.props.children.map((item, i) => {
-
             if (item.type === NavItem) {
-                /*console.log(`\n\n\n\nSelectedItem: `);
-                console.log(this.state.selectedTab);
-                console.log(`SelectedKey: ${selectedKey}\nItem.Props.i: ${item.props.i}`)*/
                 let isSelected = item.props.i == selectedKey;
-                //console.log(`isSelected: ${isSelected}`);
 
                 return React.cloneElement(item, {
                     isSelected: isSelected,
-                    //iterable: i,
-                    key: item.props.i,
+                    key: i,
                     selectItem: this.selectItem,
+                    i: i
                 });
             }
-
         });
 
         return (
-            <ul className="nav nav-tabs">
-                {renderChildren}
-            </ul>
+            <div className="tabs">
+                <ul className="nav nav-tabs">
+                    {renderChildren}
+                </ul>
+                <div className="tab-container">
+                    {
+                        (this.state.selectedTab != null) ?
+                            
+                            this.state.selectedTab.props.children
+                        :
+                        ""
+                    }
+                </div>
+            </div>
         );
     }
 }

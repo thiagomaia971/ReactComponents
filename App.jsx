@@ -5,6 +5,7 @@ import Dropdown from "./components/Dropdown.jsx";
 import DropdownItem from "./components/DropdownItem.jsx";
 import NavTab from "./components/NavTab.jsx";
 import NavItem from "./components/NavItem.jsx";
+import NavContainer from "./components/NavContainer.jsx";
 
 class App extends React.Component {
 
@@ -83,13 +84,18 @@ class App extends React.Component {
                 <br />
 
                 <NavTab>
-                    <NavItem i={0} label="Home"  />
-                    <NavItem i={1} label="Cliente" href="#test" />
+                    <NavItem i={0} label="Home"  >
+                        <div>
+                            Home é nois
+                        </div>
+                    </NavItem>
+                    
+                    <NavItem i={1} label="Cliente" >
+                        <div>
+                            Cliente é nois
+                        </div>
+                    </NavItem>
                 </NavTab>
-
-                <div id="test">
-                    tes
-                </div>
 
             </div>
         );
