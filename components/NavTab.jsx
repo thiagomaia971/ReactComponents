@@ -18,7 +18,6 @@ class NavTab extends Component {
         let c = this.props.children[0];
 
         this.props.children.map((child, i) => {
-            console.log(child.props.isSelected === true);
             if (child.props.isSelected === true)
                 c= child;
         });
