@@ -28,7 +28,7 @@ class App extends React.Component {
             data.append(files[i].name, files[i]);
         }
 
-        data.append("test", {name: "test"});
+        //data.append("test", {name: "test"});
 
         $.ajax({
             type: "POST",
@@ -121,8 +121,6 @@ class App extends React.Component {
                         </div>
                     </NavItem>
                 </NavTab>
-
-                <h2>Teste de Input</h2>
 
                 <InputFile buttonText="Upload" placeholder="Selecione uma imagem..." onClick={(files) =>{this.onClickUploadFile(files)}} />
 

@@ -24,7 +24,11 @@ class InputFile extends Component {
     }
 
     onChangeInputFile() {
-        $("#lbl_inputText").val(this.refs.refInputFile.files[0].name);
+        if(this.refs.refInputFile && this.refs.refInputFile.files[0]){
+            $("#lbl_inputText").val(this.refs.refInputFile.files[0].name);
+        }else {
+            $("#lbl_inputText").val('');
+        }
     }
 
     render() {
@@ -39,33 +43,51 @@ class InputFile extends Component {
         }
 
         let styleButton = {
-            display: 'inline-block',
             backgroundColor: buttonColor,
             color: (this.props.buttonColor == TypeColors.PMENOS) ? 'white' : '',
+            borderRadius: '0px 5px 5px 0px',
+            cursor: (this.state.isHover) ? 'pointer' : 'default'
+
+        }
+
+        let styleInput = {
+            borderRadius: '5px 0px 0px 5px',
         }
 
         return (
-            <div className="form-group" style={{margin: '10px'}}>
+            <div className="input-group" style={{ margin: '10px', width: '260px' }}>
 
                 <input id="inputFile" type="file" style={{ display: 'none' }} ref="refInputFile" onChange={this.onChangeInputFile.bind(this)} />
 
-                <input id="lbl_inputText" type="text" placeholder={this.props.placeholder} className="form-control" 
-                    style={{width: '15%', display: 'inline-block', borderRight: '0px'}}
-                    readOnly={true} onClick={this.openInputFile.bind(this)}
-                     />
+                <input id="lbl_inputText" type="text" placeholder={this.props.placeholder} className="form-control"
+                    style={styleInput} readOnly={true}
+                    onClick={this.openInputFile.bind(this)} />
 
-                <button type="button"
-                    className={'btn btn-' + this.props.buttonColor}
-                    onClick={this.onClickUpload.bind(this)}
+                <span className={'input-group-addon btn btn-' + this.props.buttonColor}
                     style={styleButton}
+                    onClick={this.onClickUpload.bind(this)} 
                     onMouseEnter={this.toggleHover.bind(this)}
                     onMouseLeave={this.toggleHover.bind(this)}>
 
-                    {this.props.buttonText}
-
-                </button>
-
-
+                    <b>{this.props.buttonText}</b>
+                </span>
+                {
+                    /*
+                }
+                                <button type="button"
+                                    className={'btn btn-' + this.props.buttonColor}
+                                    onClick={this.onClickUpload.bind(this)}
+                                    style={styleButton}
+                                    onMouseEnter={this.toggleHover.bind(this)}
+                                    onMouseLeave={this.toggleHover.bind(this)}>
+                
+                                    {this.props.buttonText}
+                
+                                </button>
+                
+                {
+                    */
+                }
             </div>
         );
     }
