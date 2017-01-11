@@ -46,7 +46,8 @@ class InputFile extends Component {
             backgroundColor: buttonColor,
             color: (this.props.buttonColor == TypeColors.PMENOS) ? 'white' : '',
             borderRadius: '0px 5px 5px 0px',
-            cursor: (this.state.isHover) ? 'pointer' : 'default'
+            cursor: (this.state.isHover) ? 'pointer' : 'default',
+            float: 'none'
 
         }
 
@@ -55,7 +56,7 @@ class InputFile extends Component {
         }
 
         return (
-            <div className="input-group" style={{ margin: '10px', width: '260px' }}>
+            <div className="input-group" style={{ margin: '10px', width: '260px', float: 'none' }}>
 
                 <input id="inputFile" type="file" style={{ display: 'none' }} ref="refInputFile" onChange={this.onChangeInputFile.bind(this)} />
 
@@ -71,23 +72,7 @@ class InputFile extends Component {
 
                     <b>{this.props.buttonText}</b>
                 </span>
-                {
-                    /*
-                }
-                                <button type="button"
-                                    className={'btn btn-' + this.props.buttonColor}
-                                    onClick={this.onClickUpload.bind(this)}
-                                    style={styleButton}
-                                    onMouseEnter={this.toggleHover.bind(this)}
-                                    onMouseLeave={this.toggleHover.bind(this)}>
                 
-                                    {this.props.buttonText}
-                
-                                </button>
-                
-                {
-                    */
-                }
             </div>
         );
     }

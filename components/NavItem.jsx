@@ -24,7 +24,7 @@ class NavItem extends Component {
                  role="presentation"
                 className={selected == true ? "active" : ""}>
 
-                <a href={this.props.href}>
+                <a href='javascript:void(0);"'>
                     {this.props.label}
                 </a>
 
@@ -44,7 +44,7 @@ NavItem.propTypes = {
 
 NavItem.defaultProps = {
     active: false,
-    href: "#",
+    href: "/",
     isSelected: false
 }
 

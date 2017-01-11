@@ -1,5 +1,10 @@
 import React from 'react';
-import Button, { TypeColors } from "./components/Button.jsx";
+import ButtonExample from './examples/ButtonExample.jsx';
+import DropdownExample from './examples/DropdownExample.jsx';
+import NavTabExample from './examples/NavTabExample.jsx';
+import InputFileExample from './examples/InputFileExample.jsx';
+import { TypeColors } from "./components/Button.jsx";
+
 import TextBoxFor from "./components/TextBoxFor.jsx";
 import Dropdown from "./components/Dropdown.jsx";
 import DropdownItem from "./components/DropdownItem.jsx";
@@ -45,84 +50,20 @@ class App extends React.Component {
 
     render() {
 
-
         return (
             <div>
 
-                <Button text={'Button - Default'} color={TypeColors.DEFAULT} />
-                <Button text={'Button - Success'} color={TypeColors.SUCCESS} />
-                <Button text={'Button - Info'} color={TypeColors.INFO} />
-                <Button text={'Button - Warning'} color={TypeColors.WARNING} />
-                <Button text={'Button - Danger'} color={TypeColors.DANGER} />
-                <Button text={'Button - Pmenos'} color={TypeColors.PMENOS} />
+                <ButtonExample />
 
-                <br />
-
-                <Dropdown label="Action" btnColor={TypeColors.DEFAULT} inline={true}>
-                    <DropdownItem label="A" onClick={() => { console.log("a") } } />
-                    <DropdownItem label="B" onClick={() => { console.log("b") } } />
-                    <DropdownItem label="C" onClick={() => { console.log("c") } } />
-                    <DropdownItem label="D" onClick={() => { console.log("d") } } />
-                </Dropdown>
-
-                <Dropdown label="Action" btnColor={TypeColors.SUCCESS} inline={true}>
-                    <DropdownItem label="A" onClick={() => { console.log("a") } } />
-                    <DropdownItem label="B" onClick={() => { console.log("b") } } />
-                    <DropdownItem label="C" onClick={() => { console.log("c") } } />
-                    <DropdownItem label="D" onClick={() => { console.log("d") } } />
-                </Dropdown>
-
-                <Dropdown label="Action" btnColor={TypeColors.INFO} inline={true}>
-                    <DropdownItem label="A" onClick={() => { console.log("a") } } />
-                    <DropdownItem label="B" onClick={() => { console.log("b") } } />
-                    <DropdownItem label="C" onClick={() => { console.log("c") } } />
-                    <DropdownItem label="D" onClick={() => { console.log("d") } } />
-                </Dropdown>
-
-                <Dropdown label="Action" btnColor={TypeColors.WARNING} inline={true}>
-                    <DropdownItem label="A" onClick={() => { console.log("a") } } />
-                    <DropdownItem label="B" onClick={() => { console.log("b") } } />
-                    <DropdownItem label="C" onClick={() => { console.log("c") } } />
-                    <DropdownItem label="D" onClick={() => { console.log("d") } } />
-                </Dropdown>
-
-                <Dropdown label="Action" btnColor={TypeColors.DANGER} inline={true}>
-                    <DropdownItem label="A" onClick={() => { console.log("a") } } />
-                    <DropdownItem label="B" onClick={() => { console.log("b") } } />
-                    <DropdownItem label="C" onClick={() => { console.log("c") } } />
-                    <DropdownItem label="D" onClick={() => { console.log("d") } } />
-                </Dropdown>
-
-                <Dropdown label="Action" btnColor={TypeColors.PMENOS} inline={true}>
-                    <DropdownItem label="A" onClick={() => { console.log("a") } } />
-                    <DropdownItem label="B" onClick={() => { console.log("b") } } />
-                    <DropdownItem label="C" onClick={() => { console.log("c") } } />
-                    <DropdownItem label="D" onClick={() => { console.log("d") } } />
-                </Dropdown>
-
-                <br />
+                <DropdownExample />
 
                 <TextBoxFor placeholder="Nome" name={'Nome'} value={this.state.nome} onChange={(value) => { this.setState({ nome: value }) } } inline={true} leftLabel="@" />
                 <TextBoxFor placeholder="Id" name={'Id'} value={this.state.id} onChange={(value) => { this.setState({ id: value }) } } inline={true} width="300px" leftLabel="R$" rightLabel="@" />
                 <TextBoxFor label="Id" placeholder="Id" name={'Id'} value={this.state.id} onChange={(value) => { this.setState({ id: value }) } } inline={true} disabled={true} />
 
-                <br />
+                <NavTabExample />
 
-                <NavTab>
-                    <NavItem i={0} label="Home"  >
-                        <div>
-                            Home é nois
-                        </div>
-                    </NavItem>
-
-                    <NavItem i={1} label="Cliente" >
-                        <div>
-                            Cliente é nois
-                        </div>
-                    </NavItem>
-                </NavTab>
-
-                <InputFile buttonText="Upload" placeholder="Selecione uma imagem..." onClick={(files) =>{this.onClickUploadFile(files)}} />
+                <InputFileExample />
 
             </div>
         );

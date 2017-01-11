@@ -53,7 +53,7 @@ class NavTab extends Component {
         });
 
         return (
-            <div className="tabs">
+            <div className="tabs" style={{minHeight: '100px'}}>
                 <ul className="nav nav-tabs">
                     {renderChildren}
                 </ul>
