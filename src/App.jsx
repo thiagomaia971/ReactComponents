@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
+import {connect} from 'react-redux'
+import { bindActionCreators } from "redux";
+
 import ButtonExample from './examples/ButtonExample.jsx';
 import DropdownExample from './examples/DropdownExample.jsx';
 import NavTabExample from './examples/NavTabExample.jsx';
@@ -11,6 +14,8 @@ import DropdownItem from "./components/DropdownItem.jsx";
 import NavTab from "./components/NavTab.jsx";
 import NavItem from "./components/NavItem.jsx";
 import InputFile from "./components/InputFile.jsx";
+
+import { fetchSuccess, fetchDanger } from "./actions/fetch";
 
 class App extends React.Component {
 
@@ -26,14 +31,11 @@ class App extends React.Component {
 
     onClickUploadFile(files) {
 
-        //let files = $("#files")[0].files;
         let data = new FormData();
 
         for (var i = 0; i < files.length; i++) {
             data.append(files[i].name, files[i]);
         }
-
-        //data.append("test", {name: "test"});
 
         $.ajax({
             type: "POST",
@@ -50,8 +52,10 @@ class App extends React.Component {
 
     render() {
 
+        const {fetchSuccess, fetchStart} = this.props;
+
         return (
-            <div>
+            <div onClick={() => {fetchStart()}}>
 
                 <ButtonExample />
 
@@ -70,4 +74,25 @@ class App extends React.Component {
     }
 }
 
-export default App;
+App.propTypes = {
+    message: PropTypes.string.isRequired,
+    fetchSuccess: PropTypes.func.isRequired,
+    fetchDanger: PropTypes.func.isRequired,
+    fetchStart: PropTypes.func.isRequired
+}
+
+App.defaultProps = {
+    message: ''
+}
+
+function mapStateToProps(state) {
+    return {
+        message: state.fetch.message,
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ fetchSuccess, fetchDanger, fetchStart }, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
